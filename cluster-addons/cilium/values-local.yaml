@@ -1,9 +1,9 @@
+sessionAffinity: false
 originalMatchLabels: true
 eni:
   enabled: false
 tunnel: vxlan
 ipam:
-  mode: kubernetes
   mode: cluster-pool
   operator:
     clusterPoolIPv4PodCIDR: 10.242.0.0/16
