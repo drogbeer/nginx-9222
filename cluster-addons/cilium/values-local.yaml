@@ -1,0 +1,30 @@
+originalMatchLabels: true
+eni:
+  enabled: false
+tunnel: vxlan
+ipam:
+  mode: kubernetes
+  mode: cluster-pool
+  operator:
+    clusterPoolIPv4PodCIDR: 10.242.0.0/16
+    clusterPoolIPv4MaskSize: 24
+egressMasqueradeInterfaces: eth0
+kubeProxyReplacement: strict
+k8sServiceHost: nginx-coredns-control-plane
+k8sServicePort: 6443
+hubble:
+  enabled: true
+  ui:
+    enabled: true
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+      hosts:
+        - hubble-ui.local.dev
+  relay:
+    enabled: true
+  tls:
+    enabled: false
+prometheus:
+  enabled: true   
