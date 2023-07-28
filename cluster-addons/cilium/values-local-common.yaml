@@ -1,4 +1,3 @@
-sessionAffinity: false
 originalMatchLabels: true
 eni:
   enabled: false
@@ -9,8 +8,6 @@ ipam:
     clusterPoolIPv4PodCIDR: 10.242.0.0/16
     clusterPoolIPv4MaskSize: 24
 egressMasqueradeInterfaces: eth0
-kubeProxyReplacement: strict
-k8sServiceHost: nginx-coredns-control-plane
 k8sServicePort: 6443
 hubble:
   enabled: true
@@ -21,7 +18,7 @@ hubble:
       annotations:
         kubernetes.io/ingress.class: nginx
       hosts:
-        - hubble-ui.local.dev
+        - hubble-ui.nip.io
   relay:
     enabled: true
   tls:
