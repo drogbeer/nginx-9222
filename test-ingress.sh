@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CLUSTER=$(kubectl config current-context) 
+
 echo "Testing endpoint before coredns restart.."
 for i in `seq 10`
 do
@@ -9,8 +11,8 @@ do
 done
   
 
-kubectl --context kind-nginx-coredns -n kube-system rollout restart deployment coredns
-kubectl --context kind-nginx-coredns -n kube-system rollout status deployment coredns
+kubectl --context "${CLUSTER}" -n kube-system rollout restart deployment coredns
+kubectl --context "${CLUSTER}" -n kube-system rollout status deployment coredns
 
 echo "Testing endpoint after coredns restart.."
 for i in `seq 10`
@@ -21,8 +23,8 @@ do
 done
 
 echo "Reloading NGINX config"
-CONTROLLER_POD=$(kubectl --context kind-nginx-coredns -n nginx get pods --no-headers | awk '{print $1}')
-kubectl --context kind-nginx-coredns -n nginx exec -it "${CONTROLLER_POD}" -- nginx -s reload
+CONTROLLER_POD=$(kubectl --context "${CLUSTER}" -n nginx get pods --no-headers | awk '{print $1}')
+kubectl --context "${CLUSTER}" -n nginx exec -it "${CONTROLLER_POD}" -- nginx -s reload
 
 echo "Testing endpoint after NGINX reload.."
 for i in `seq 10`

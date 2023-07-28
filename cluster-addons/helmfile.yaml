@@ -11,7 +11,8 @@ repositories:
     url: https://kubernetes.github.io/ingress-nginx
 
 environments:
-  local: {}
+  local-bpf: {}
+  local-kube-proxy: {}
 
 releases:
   - name: cilium
@@ -19,7 +20,13 @@ releases:
     version: 1.11.10
     namespace: cilium-system
     values:
-      - cilium/values-local.yaml
+    {{- if eq .Environment.Name "local-bpf" }}
+      - cilium/values-local-bpf.yaml
+    {{- end }}
+    {{ if eq .Environment.Name "local-kube-proxy" }}
+      - cilium/values-local-kubeproxy.yaml
+    {{- end }}
+      - cilium/values-local-common.yaml
 
   - name: nginx
     installed: true

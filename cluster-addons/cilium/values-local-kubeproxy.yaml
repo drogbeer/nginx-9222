@@ -1,0 +1,12 @@
+kubeProxyReplacement: partial
+k8sServiceHost: cilium-kube-proxy-control-plane
+hostServices:
+  enabled: false
+externalIPs:
+  enabled: true
+nodePort:
+  enabled: true
+hostPort:
+  enabled: true
+bpf:
+  masquerade: false

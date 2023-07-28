@@ -1,0 +1,2 @@
+kubeProxyReplacement: strict
+k8sServiceHost: cilium-bpf-control-plane
